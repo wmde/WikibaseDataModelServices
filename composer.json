@@ -42,7 +42,7 @@
 	"scripts": {
 		"test": [
 			"composer validate --no-interaction",
-			"phpunit --coverage-php /dev/null"
+			"phpunit"
 		],
 		"cs": [
 			"composer phpcs",
