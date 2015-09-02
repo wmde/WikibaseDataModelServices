@@ -22,11 +22,13 @@ class EntityDifferTest extends \PHPUnit_Framework_TestCase {
 		$differ->diffEntities( new EntityOfUnknownType(), new EntityOfUnknownType() );
 	}
 
-	public function testGivenEntitiesWithDifferentTypes_exceptionIsThrown() {
+	public function testGivenEntitiesWithDifferentTypes_emptyEntityDiffIsReturned() {
 		$differ = new EntityDiffer();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$differ->diffEntities( new Item(), Property::newFromType( 'string' ) );
+		$diff = $differ->diffEntities( new Item(), Property::newFromType( 'string' ) );
+
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Diff\EntityDiff', $diff );
+		$this->assertTrue( $diff->isEmpty() );
 	}
 
 	public function testGivenTwoEmptyItems_emptyItemDiffIsReturned() {
