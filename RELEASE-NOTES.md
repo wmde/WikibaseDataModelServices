@@ -1,7 +1,7 @@
 # Wikibase DataModel Services release notes
 
-## Version 3.2 (dev)
-* Introduced PropertyInfoFormatter
+## Version 3.2.0 (dev)
+* Added `PropertyFormatterUrlLookup`
 
 ## Version 3.1.1 (2015-11-15)
 * Made `EntityRetrievingTermLookup` handle `EntityLookupException` ([T118581](https://phabricator.wikimedia.org/T118581))
