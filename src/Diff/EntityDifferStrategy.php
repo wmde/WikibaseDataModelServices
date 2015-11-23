@@ -14,11 +14,14 @@ use Wikibase\DataModel\Entity\EntityDocument;
 interface EntityDifferStrategy {
 
 	/**
-	 * @param string $entityType
+	 * @since 4.0
 	 *
-	 * @return boolean
+	 * @param string $fromType
+	 * @param string $toType
+	 *
+	 * @return bool
 	 */
-	public function canDiffEntityType( $entityType );
+	public function canDiffEntityTypes( $fromType, $toType );
 
 	/**
 	 * @param EntityDocument $from

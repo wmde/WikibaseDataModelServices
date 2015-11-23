@@ -33,12 +33,15 @@ class ItemDiffer implements EntityDifferStrategy {
 	}
 
 	/**
-	 * @param string $entityType
+	 * @since 4.0
+	 *
+	 * @param string $fromType
+	 * @param string $toType
 	 *
 	 * @return bool
 	 */
-	public function canDiffEntityType( $entityType ) {
-		return $entityType === 'item';
+	public function canDiffEntityTypes( $fromType, $toType ) {
+		return $fromType === 'item' && $toType === 'item';
 	}
 
 	/**
