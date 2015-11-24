@@ -15,9 +15,8 @@ interface StatementGrouper {
 	/**
 	 * @param StatementList $statements
 	 *
-	 * @return StatementList[] An associative array, mapping statement group identifiers to
-	 *  StatementList objects. Implementations should use "statements" as the default group
-	 *  identifier, if not requested otherwise.
+	 * @return StatementList[] All the statements from the provided list must be present in the result exactly
+	 * once, and no other statements can be included. The array keys can be used to contruct message keys.
 	 */
 	public function groupStatements( StatementList $statements );
 
