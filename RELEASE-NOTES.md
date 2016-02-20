@@ -1,5 +1,8 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.2.1 (2016-02-20)
+* Add RestrictedEntityLookup::resetEntityAccessCount
+
 ## Version 3.2.0 (2015-12-03)
 
 * Added `StatementGrouper` interface and the most basic implementations:
