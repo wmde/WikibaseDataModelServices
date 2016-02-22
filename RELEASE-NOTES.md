@@ -1,5 +1,8 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.2.2 (2016-02-22)
+* Undid the changes in 3.2.1
+
 ## Version 3.2.1 (2016-02-20)
 * Add RestrictedEntityLookup::resetEntityAccessCount
 
