@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class SuffixEntityIdParser implements EntityIdParser {
+class PrefixedEntityIdParser implements EntityIdParser {
 
 	/**
 	 * @var string
