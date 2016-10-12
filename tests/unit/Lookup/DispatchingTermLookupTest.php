@@ -71,90 +71,134 @@ class DispatchingTermLookupTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetLabelFromLocalRepo() {
 		$localLookup = $this->getMock( TermLookup::class );
-		$localLookup->expects( $this->once() )->method( 'getLabel' );
+		$localLookup->expects( $this->once() )
+			->method( 'getLabel' )
+			->willReturn( 'label' );
 		$dispatcher = new DispatchingTermLookup( [
 			'' => $localLookup,
 			'foo' => $this->getMock( TermLookup::class ),
 		] );
 
-		$dispatcher->getLabel( new ItemId( 'Q123' ), 'en' );
+		$this->assertSame(
+			'label',
+			$dispatcher->getLabel( new ItemId( 'Q123' ), 'en' )
+		);
 	}
 
 	public function testGetLabelFromForeignRepo() {
 		$foreignLookup = $this->getMock( TermLookup::class );
-		$foreignLookup->expects( $this->once() )->method( 'getLabel' );
+		$foreignLookup->expects( $this->once() )
+			->method( 'getLabel' )
+			->willReturn( 'label' );
 		$dispatcher = new DispatchingTermLookup( [
 			'' => $this->getMock( TermLookup::class ),
 			'foo' => $foreignLookup,
 		] );
 
-		$dispatcher->getLabel( new ItemId( 'foo:Q123' ), 'en' );
+		$this->assertSame(
+			'label',
+			$dispatcher->getLabel( new ItemId( 'foo:Q123' ), 'en' )
+		);
 	}
 
 	public function testGetLabelsFromLocalRepo() {
+		$labels = [ 'en' => 'enLabel', 'fr' => 'frLabel' ];
 		$localLookup = $this->getMock( TermLookup::class );
-		$localLookup->expects( $this->once() )->method( 'getLabels' );
+		$localLookup->expects( $this->once() )
+			->method( 'getLabels' )
+			->willReturn( $labels );
 		$dispatcher = new DispatchingTermLookup( [
 			'' => $localLookup,
 			'foo' => $this->getMock( TermLookup::class ),
 		] );
 
-		$dispatcher->getLabels( new ItemId( 'Q123' ), [ 'en' ] );
+		$this->assertSame(
+			$labels,
+			$dispatcher->getLabels( new ItemId( 'Q123' ), [ 'en', 'fr' ] )
+		);
 	}
 
 	public function testGetLabelsFromForeignRepo() {
+		$labels = [ 'en' => 'enLabel', 'fr' => 'frLabel' ];
 		$foreignLookup = $this->getMock( TermLookup::class );
-		$foreignLookup->expects( $this->once() )->method( 'getLabels' );
+		$foreignLookup->expects( $this->once() )
+			->method( 'getLabels' )
+			->willReturn( $labels );
 		$dispatcher = new DispatchingTermLookup( [
 			'' => $this->getMock( TermLookup::class ),
 			'foo' => $foreignLookup,
 		] );
 
-		$dispatcher->getLabels( new ItemId( 'foo:Q123' ), [ 'en' ] );
+		$this->assertSame(
+			$labels,
+			$dispatcher->getLabels( new ItemId( 'foo:Q123' ), [ 'en', 'fr' ] )
+		);
 	}
 
 	public function testGetDescriptionFromLocalRepo() {
 		$localLookup = $this->getMock( TermLookup::class );
-		$localLookup->expects( $this->once() )->method( 'getDescription' );
+		$localLookup->expects( $this->once() )
+			->method( 'getDescription' )
+			->willReturn( 'description' );
 		$dispatcher = new DispatchingTermLookup( [
 			'' => $localLookup,
 			'foo' => $this->getMock( TermLookup::class ),
 		] );
 
-		$dispatcher->getDescription( new ItemId( 'Q123' ), 'en' );
+		$this->assertSame(
+			'description',
+			$dispatcher->getDescription( new ItemId( 'Q123' ), 'en' )
+		);
 	}
 
 	public function testGetDescriptionFromForeignRepo() {
 		$foreignLookup = $this->getMock( TermLookup::class );
-		$foreignLookup->expects( $this->once() )->method( 'getDescription' );
+		$foreignLookup->expects( $this->once() )
+			->method( 'getDescription' )
+			->willReturn( 'description' );
 		$dispatcher = new DispatchingTermLookup( [
 			'' => $this->getMock( TermLookup::class ),
 			'foo' => $foreignLookup,
 		] );
 
-		$dispatcher->getDescription( new ItemId( 'foo:Q123' ), 'en' );
+		$this->assertSame(
+			'description',
+			$dispatcher->getDescription( new ItemId( 'foo:Q123' ), 'en' )
+		);
 	}
 
 	public function testGetDescriptionsFromLocalRepo() {
+		$descriptions = [ 'en' => 'description' ];
 		$localLookup = $this->getMock( TermLookup::class );
-		$localLookup->expects( $this->once() )->method( 'getDescriptions' );
+		$localLookup->expects( $this->once() )
+			->method( 'getDescriptions' )
+			->willReturn( $descriptions );
 		$dispatcher = new DispatchingTermLookup( [
 			'' => $localLookup,
 			'foo' => $this->getMock( TermLookup::class ),
 		] );
 
-		$dispatcher->getDescriptions( new ItemId( 'Q123' ), [ 'en' ] );
+		$this->assertSame(
+			$descriptions,
+			$dispatcher->getDescriptions( new ItemId( 'Q123' ), [ 'en' ] )
+		);
 	}
 
 	public function testGetDescriptionsFromForeignRepo() {
+		$descriptions = [ 'en' => 'description' ];
 		$foreignLookup = $this->getMock( TermLookup::class );
-		$foreignLookup->expects( $this->once() )->method( 'getDescriptions' );
+		$foreignLookup->expects( $this->once() )
+			->method( 'getDescriptions' )
+			->willReturn( $descriptions );
 		$dispatcher = new DispatchingTermLookup( [
 			'' => $this->getMock( TermLookup::class ),
 			'foo' => $foreignLookup,
 		] );
 
-		$dispatcher->getDescriptions( new ItemId( 'foo:Q123' ), [ 'en' ] );
+		$this->assertSame(
+			$descriptions,
+			$dispatcher->getDescriptions( new ItemId( 'foo:Q123' ), [ 'en' ] )
+		);
 	}
 
 }
