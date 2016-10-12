@@ -23,8 +23,8 @@ class DispatchingTermLookup implements TermLookup {
 
 	/**
 	 * @param TermLookup[] $lookups associative array with repository names (strings) as keys
-	 *                                and TermLookup objects as values. Empty-string key
-	 *                                defines lookup for the local repository.
+	 *                              and TermLookup objects as values. Empty-string key
+	 *                              defines lookup for the local repository.
 	 *
 	 * @throws ParameterAssertionException
 	 */
