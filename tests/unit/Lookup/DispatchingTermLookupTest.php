@@ -1,10 +1,12 @@
 <?php
 namespace Wikibase\DataModel\Services\Tests\Lookup;
+
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\DispatchingTermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikimedia\Assert\ParameterAssertionException;
+
 /**
  * @covers Wikibase\DataModel\Services\Lookup\DispatchingTermLookup
  *

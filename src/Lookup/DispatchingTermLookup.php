@@ -70,7 +70,7 @@ class DispatchingTermLookup implements TermLookup {
 	 * @throws TermLookupException
 	 * @throws UnknownForeignRepositoryException
 	 *
-	 * @return null|string
+	 * @return string[]
 	 */
 	public function getLabels( EntityId $entityId, array $languageCodes ) {
 		return $this->getLookupForEntityId( $entityId )->getLabels( $entityId, $languageCodes );
@@ -91,7 +91,6 @@ class DispatchingTermLookup implements TermLookup {
 		return $this->getLookupForEntityId( $entityId )->getDescription( $entityId, $languageCode );
 	}
 
-
 	/**
 	 * @see TermLookup::getDescriptions
 	 *
@@ -101,7 +100,7 @@ class DispatchingTermLookup implements TermLookup {
 	 * @throws TermLookupException
 	 * @throws UnknownForeignRepositoryException
 	 *
-	 * @return null|string
+	 * @return string[]
 	 */
 	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
 		return $this->getLookupForEntityId( $entityId )->getDescriptions( $entityId, $languageCodes );
@@ -118,4 +117,5 @@ class DispatchingTermLookup implements TermLookup {
 		}
 		return $this->lookups[$repo];
 	}
+
 }
