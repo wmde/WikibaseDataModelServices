@@ -113,7 +113,7 @@ class DispatchingTermLookup implements TermLookup {
 	private function getLookupForEntityId( EntityId $entityId ) {
 		$repo = $entityId->getRepositoryName();
 		if ( !isset( $this->lookups[$repo] ) ) {
-			throw new UnknownForeignRepositoryException( $entityId->getRepositoryName() );
+			throw new UnknownForeignRepositoryException( $repo );
 		}
 		return $this->lookups[$repo];
 	}
