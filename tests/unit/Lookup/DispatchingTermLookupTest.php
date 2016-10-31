@@ -25,9 +25,6 @@ class DispatchingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	public function provideInvalidForeignLookups() {
 		return [
 			'no lookups given' => [[]],
-			'no lookup given for the local repository' => [
-				[ 'foo' => $this->getMock( TermLookup::class ), ]
-			],
 			'not an implementation of TermLookup given as a lookup' => [
 				[ '' => new ItemId( 'Q123' ) ],
 			],
@@ -69,134 +66,110 @@ class DispatchingTermLookupTest extends \PHPUnit_Framework_TestCase {
 		];
 	}
 
-	public function testGetLabelFromLocalRepo() {
-		$localLookup = $this->getMock( TermLookup::class );
-		$localLookup->expects( $this->once() )
+	public function testGetLabel() {
+		$lookup1 = $this->getMock( TermLookup::class );
+		$lookup1->expects( $this->once() )
 			->method( 'getLabel' )
-			->willReturn( 'label' );
+			->willReturn( 'label1' );
+
+		$lookup2 = $this->getMock( TermLookup::class );
+		$lookup2->expects( $this->once() )
+			->method( 'getLabel' )
+			->willReturn( 'label2' );
+
 		$dispatcher = new DispatchingTermLookup( [
-			'' => $localLookup,
-			'foo' => $this->getMock( TermLookup::class ),
+			'' => $lookup1,
+			'foo' => $lookup2,
 		] );
 
 		$this->assertSame(
-			'label',
+			'label1',
 			$dispatcher->getLabel( new ItemId( 'Q123' ), 'en' )
 		);
-	}
-
-	public function testGetLabelFromForeignRepo() {
-		$foreignLookup = $this->getMock( TermLookup::class );
-		$foreignLookup->expects( $this->once() )
-			->method( 'getLabel' )
-			->willReturn( 'label' );
-		$dispatcher = new DispatchingTermLookup( [
-			'' => $this->getMock( TermLookup::class ),
-			'foo' => $foreignLookup,
-		] );
-
 		$this->assertSame(
-			'label',
+			'label2',
 			$dispatcher->getLabel( new ItemId( 'foo:Q123' ), 'en' )
 		);
 	}
 
-	public function testGetLabelsFromLocalRepo() {
-		$labels = [ 'en' => 'enLabel', 'fr' => 'frLabel' ];
-		$localLookup = $this->getMock( TermLookup::class );
-		$localLookup->expects( $this->once() )
+	public function testGetLabels() {
+		$labels1 = [ 'en' => 'enLabel1', 'fr' => 'frLabel1' ];
+		$lookup1 = $this->getMock( TermLookup::class );
+		$lookup1->expects( $this->once() )
 			->method( 'getLabels' )
-			->willReturn( $labels );
+			->willReturn( $labels1 );
+
+		$labels2 = [ 'en' => 'enLabel2', 'fr' => 'frLabel2' ];
+		$lookup2 = $this->getMock( TermLookup::class );
+		$lookup2->expects( $this->once() )
+			->method( 'getLabels' )
+			->willReturn( $labels2 );
+
 		$dispatcher = new DispatchingTermLookup( [
-			'' => $localLookup,
-			'foo' => $this->getMock( TermLookup::class ),
+			'' => $lookup1,
+			'foo' => $lookup2,
 		] );
 
 		$this->assertSame(
-			$labels,
+			$labels1,
 			$dispatcher->getLabels( new ItemId( 'Q123' ), [ 'en', 'fr' ] )
 		);
-	}
-
-	public function testGetLabelsFromForeignRepo() {
-		$labels = [ 'en' => 'enLabel', 'fr' => 'frLabel' ];
-		$foreignLookup = $this->getMock( TermLookup::class );
-		$foreignLookup->expects( $this->once() )
-			->method( 'getLabels' )
-			->willReturn( $labels );
-		$dispatcher = new DispatchingTermLookup( [
-			'' => $this->getMock( TermLookup::class ),
-			'foo' => $foreignLookup,
-		] );
-
 		$this->assertSame(
-			$labels,
+			$labels2,
 			$dispatcher->getLabels( new ItemId( 'foo:Q123' ), [ 'en', 'fr' ] )
 		);
 	}
 
-	public function testGetDescriptionFromLocalRepo() {
-		$localLookup = $this->getMock( TermLookup::class );
-		$localLookup->expects( $this->once() )
+	public function testGetDescription() {
+		$lookup1 = $this->getMock( TermLookup::class );
+		$lookup1->expects( $this->once() )
 			->method( 'getDescription' )
-			->willReturn( 'description' );
+			->willReturn( 'description1' );
+
+		$lookup2 = $this->getMock( TermLookup::class );
+		$lookup2->expects( $this->once() )
+			->method( 'getDescription' )
+			->willReturn( 'description2' );
+
 		$dispatcher = new DispatchingTermLookup( [
-			'' => $localLookup,
-			'foo' => $this->getMock( TermLookup::class ),
+			'' => $lookup1,
+			'foo' => $lookup2,
 		] );
 
 		$this->assertSame(
-			'description',
+			'description1',
 			$dispatcher->getDescription( new ItemId( 'Q123' ), 'en' )
 		);
-	}
-
-	public function testGetDescriptionFromForeignRepo() {
-		$foreignLookup = $this->getMock( TermLookup::class );
-		$foreignLookup->expects( $this->once() )
-			->method( 'getDescription' )
-			->willReturn( 'description' );
-		$dispatcher = new DispatchingTermLookup( [
-			'' => $this->getMock( TermLookup::class ),
-			'foo' => $foreignLookup,
-		] );
-
 		$this->assertSame(
-			'description',
+			'description2',
 			$dispatcher->getDescription( new ItemId( 'foo:Q123' ), 'en' )
 		);
 	}
 
-	public function testGetDescriptionsFromLocalRepo() {
-		$descriptions = [ 'en' => 'description' ];
-		$localLookup = $this->getMock( TermLookup::class );
-		$localLookup->expects( $this->once() )
+	public function testGetDescriptions() {
+		$descriptions1 = [ 'en' => 'description1' ];
+		$lookup1 = $this->getMock( TermLookup::class );
+		$lookup1->expects( $this->once() )
 			->method( 'getDescriptions' )
-			->willReturn( $descriptions );
+			->willReturn( $descriptions1 );
+
+		$descriptions2 = [ 'en' => 'description2' ];
+		$lookup2 = $this->getMock( TermLookup::class );
+		$lookup2->expects( $this->once() )
+			->method( 'getDescriptions' )
+			->willReturn( $descriptions2 );
+
 		$dispatcher = new DispatchingTermLookup( [
-			'' => $localLookup,
-			'foo' => $this->getMock( TermLookup::class ),
+			'' => $lookup1,
+			'foo' => $lookup2,
 		] );
 
 		$this->assertSame(
-			$descriptions,
+			$descriptions1,
 			$dispatcher->getDescriptions( new ItemId( 'Q123' ), [ 'en' ] )
 		);
-	}
-
-	public function testGetDescriptionsFromForeignRepo() {
-		$descriptions = [ 'en' => 'description' ];
-		$foreignLookup = $this->getMock( TermLookup::class );
-		$foreignLookup->expects( $this->once() )
-			->method( 'getDescriptions' )
-			->willReturn( $descriptions );
-		$dispatcher = new DispatchingTermLookup( [
-			'' => $this->getMock( TermLookup::class ),
-			'foo' => $foreignLookup,
-		] );
-
 		$this->assertSame(
-			$descriptions,
+			$descriptions2,
 			$dispatcher->getDescriptions( new ItemId( 'foo:Q123' ), [ 'en' ] )
 		);
 	}

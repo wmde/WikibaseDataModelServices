@@ -29,11 +29,7 @@ class DispatchingTermLookup implements TermLookup {
 	 * @throws ParameterAssertionException
 	 */
 	public function __construct( array $lookups ) {
-		Assert::parameter(
-			!empty( $lookups ) && array_key_exists( '', $lookups ),
-			'$lookups',
-			'must must not be empty and must contain an empty-string key'
-		);
+		Assert::parameter( !empty( $lookups ), '$lookups', 'must must not be empty' );
 		Assert::parameterElementType( TermLookup::class, $lookups, '$lookups' );
 		Assert::parameterElementType( 'string', array_keys( $lookups ), 'array_keys( $lookups )' );
 		foreach ( array_keys( $lookups ) as $repositoryName ) {
