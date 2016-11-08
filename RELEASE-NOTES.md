@@ -6,6 +6,7 @@
 * Added `EntityIdPager` from `Wikibase\Repo\Store`.
 * Added services for foreign entities:
   * `DispatchingEntityLookup`
+  * `PrefixMappingEntityIdParser`
   * `PrefixMappingEntityIdParserFactory`
   * `UnknownForeignRepositoryException`
 
