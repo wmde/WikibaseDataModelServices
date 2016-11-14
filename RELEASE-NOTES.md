@@ -3,6 +3,7 @@
 ## Version 3.7.0 (2016-11-08)
 
 * Raised minimum PHP version to 5.5.
+* Compatible with Wikibase DataModel 6.3
 * Added `EntityIdPager` from `Wikibase\Repo\Store`.
 * Added services for foreign entities:
   * `DispatchingEntityLookup`
