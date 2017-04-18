@@ -28,6 +28,7 @@ install: travis_retry composer require "wikibase/data-model=$DM" --prefer-source
 script: composer ci
 
 notifications:
+  email: false
   irc:
     channels:
       - "chat.freenode.net#wikidata-feed"
