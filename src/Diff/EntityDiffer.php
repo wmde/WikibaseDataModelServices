@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Services\Diff;
 
-use InvalidArgumentException;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
 
@@ -22,10 +21,11 @@ class EntityDiffer {
 	public function __construct() {
 		$this->registerEntityDifferStrategy( new ItemDiffer() );
 		$this->registerEntityDifferStrategy( new PropertyDiffer() );
+		$this->registerEntityDifferStrategy( new ItemAndPropertyDiffer() );
 	}
 
-	public function registerEntityDifferStrategy( EntityDifferStrategy $differStrategy ) {
-		$this->differStrategies[] = $differStrategy;
+	public function registerEntityDifferStrategy( EntityDifferStrategy $differ ) {
+		$this->differStrategies[] = $differ;
 	}
 
 	/**
@@ -33,31 +33,24 @@ class EntityDiffer {
 	 * @param EntityDocument $to
 	 *
 	 * @return EntityDiff
-	 * @throws InvalidArgumentException
 	 * @throws RuntimeException
 	 */
 	public function diffEntities( EntityDocument $from, EntityDocument $to ) {
-		$this->assertTypesMatch( $from, $to );
-
-		return $this->getDiffStrategy( $from->getType() )->diffEntities( $from, $to );
-	}
-
-	private function assertTypesMatch( EntityDocument $from, EntityDocument $to ) {
-		if ( $from->getType() !== $to->getType() ) {
-			throw new InvalidArgumentException( 'Can only diff two entities of the same type' );
-		}
+		$differ = $this->getDiffStrategy( $from->getType(), $to->getType() );
+		return $differ->diffEntities( $from, $to );
 	}
 
 	/**
-	 * @param string $entityType
+	 * @param string $fromType
+	 * @param string $toType
 	 *
 	 * @throws RuntimeException
 	 * @return EntityDifferStrategy
 	 */
-	private function getDiffStrategy( $entityType ) {
-		foreach ( $this->differStrategies as $diffStrategy ) {
-			if ( $diffStrategy->canDiffEntityType( $entityType ) ) {
-				return $diffStrategy;
+	private function getDiffStrategy( $fromType, $toType ) {
+		foreach ( $this->differStrategies as $differ ) {
+			if ( $differ->canDiffEntityTypes( $fromType, $toType ) ) {
+				return $differ;
 			}
 		}
 
@@ -68,20 +61,20 @@ class EntityDiffer {
 	 * @param EntityDocument $entity
 	 *
 	 * @return EntityDiff
-	 * @throws InvalidArgumentException
 	 */
 	public function getConstructionDiff( EntityDocument $entity ) {
-		return $this->getDiffStrategy( $entity->getType() )->getConstructionDiff( $entity );
+		$differ = $this->getDiffStrategy( $entity->getType(), $entity->getType() );
+		return $differ->getConstructionDiff( $entity );
 	}
 
 	/**
 	 * @param EntityDocument $entity
 	 *
 	 * @return EntityDiff
-	 * @throws InvalidArgumentException
 	 */
 	public function getDestructionDiff( EntityDocument $entity ) {
-		return $this->getDiffStrategy( $entity->getType() )->getDestructionDiff( $entity );
+		$differ = $this->getDiffStrategy( $entity->getType(), $entity->getType() );
+		return $differ->getDestructionDiff( $entity );
 	}
 
 }
