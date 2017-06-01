@@ -27,6 +27,7 @@
 		"wikimedia/assert": "~0.2.2"
 	},
 	"require-dev": {
+		"phpunit/phpunit": "~4.8",
 		"mediawiki/mediawiki-codesniffer": "~0.7",
 		"phpmd/phpmd": "~2.3",
 		"phpunit/phpunit": "~4.8"
@@ -58,7 +59,7 @@
 			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
 		],
 		"phpmd": [
-			"vendor/bin/phpmd src/,tests/unit/ text phpmd.xml"
+			"vendor/bin/phpmd src/ text phpmd.xml"
 		]
 	}
 }
