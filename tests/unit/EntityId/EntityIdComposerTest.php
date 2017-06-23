@@ -31,7 +31,7 @@ class EntityIdComposerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidConstructorArgumentProvider() {
-		$callable = function( $repositoryName, $uniquePart ) {
+		$callable = function() {
 		};
 
 		return [
@@ -52,7 +52,7 @@ class EntityIdComposerTest extends PHPUnit_Framework_TestCase {
 
 	public function testGivenInvalidCallback_buildFails() {
 		$composer = new EntityIdComposer( [
-			'item' => function( $repositoryName, $uniquePart ) {
+			'item' => function() {
 				return null;
 			},
 		] );
