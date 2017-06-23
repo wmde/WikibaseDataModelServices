@@ -14,6 +14,8 @@ use Wikibase\DataModel\Entity\EntityId;
  * Meant to be the counterpart for @see Int32EntityId::getNumericId, as well as an extensible
  * replacement for @see LegacyIdInterpreter::newIdFromTypeAndNumber.
  *
+ * @since 3.9
+ *
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */
