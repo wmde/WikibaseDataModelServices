@@ -40,6 +40,8 @@ class StatementListDifferPatcherTest extends \PHPUnit_Framework_TestCase {
 		$patcher->patchStatementList( $latestStatementList, $diff );
 
 		$statement = $latestStatementList->getFirstStatementWithGuid( $guid );
+		$this->assertEquals( new PropertyNoValueSnak( 3 ), $statement->getQualifiers()[0] );
+		$this->assertEquals( new PropertyNoValueSnak( 2 ), $statement->getQualifiers()[1] );
 		$this->assertEquals( 2, $statement->getQualifiers()->count() );
 	}
 }
