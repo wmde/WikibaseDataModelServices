@@ -25,7 +25,8 @@ class EntityDiffer {
 	}
 
 	public function registerEntityDifferStrategy( EntityDifferStrategy $differStrategy ) {
-		$this->differStrategies[] = $differStrategy;
+		$differId = get_class( $differStrategy );
+		$this->differStrategies[$differId] = $differStrategy;
 	}
 
 	/**
