@@ -39,7 +39,8 @@ class EntityDiffer {
 	public function diffEntities( EntityDocument $from, EntityDocument $to ) {
 		$this->assertTypesMatch( $from, $to );
 
-		return $this->getDiffStrategy( $from->getType() )->diffEntities( $from, $to );
+		$differ = $this->getDiffStrategy( $from->getType(), $to->getType() );
+		return $differ->diffEntities( $from, $to );
 	}
 
 	private function assertTypesMatch( EntityDocument $from, EntityDocument $to ) {
@@ -49,14 +50,15 @@ class EntityDiffer {
 	}
 
 	/**
-	 * @param string $entityType
+	 * @param string $fromType
+	 * @param string $toType
 	 *
 	 * @throws RuntimeException
 	 * @return EntityDifferStrategy
 	 */
-	private function getDiffStrategy( $entityType ) {
+	private function getDiffStrategy( $fromType, $toType ) {
 		foreach ( $this->differStrategies as $diffStrategy ) {
-			if ( $diffStrategy->canDiffEntityType( $entityType ) ) {
+			if ( $diffStrategy->canDiffEntityTypes( $fromType, $toType ) ) {
 				return $diffStrategy;
 			}
 		}
@@ -71,7 +73,8 @@ class EntityDiffer {
 	 * @throws InvalidArgumentException
 	 */
 	public function getConstructionDiff( EntityDocument $entity ) {
-		return $this->getDiffStrategy( $entity->getType() )->getConstructionDiff( $entity );
+		$type = $entity->getType();
+		return $this->getDiffStrategy( $type, $type )->getConstructionDiff( $entity );
 	}
 
 	/**
@@ -81,7 +84,8 @@ class EntityDiffer {
 	 * @throws InvalidArgumentException
 	 */
 	public function getDestructionDiff( EntityDocument $entity ) {
-		return $this->getDiffStrategy( $entity->getType() )->getDestructionDiff( $entity );
+		$type = $entity->getType();
+		return $this->getDiffStrategy( $type, $type )->getDestructionDiff( $entity );
 	}
 
 }
