@@ -6,15 +6,15 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\PrefixedEntityIdParser;
 
 /**
- * @covers Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser
+ * @covers Wikibase\DataModel\Services\EntityId\PrefixedEntityIdParser
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class SuffixEntityIdParserTest extends \PHPUnit_Framework_TestCase {
+class PrefixedEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 
 	public function validInputProvider() {
 		return [
@@ -27,7 +27,7 @@ class SuffixEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validInputProvider
 	 */
 	public function testParse( $prefix, $input, $expected ) {
-		$parser = new SuffixEntityIdParser( $prefix, new BasicEntityIdParser() );
+		$parser = new PrefixedEntityIdParser( $prefix, new BasicEntityIdParser() );
 		$this->assertEquals( $expected, $parser->parse( $input ) );
 	}
 
@@ -48,7 +48,7 @@ class SuffixEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidInputProvider
 	 */
 	public function testParse_invalid( $prefix, $input ) {
-		$parser = new SuffixEntityIdParser( $prefix, new BasicEntityIdParser() );
+		$parser = new PrefixedEntityIdParser( $prefix, new BasicEntityIdParser() );
 
 		$this->setExpectedException( EntityIdParsingException::class );
 		$parser->parse( $input );
