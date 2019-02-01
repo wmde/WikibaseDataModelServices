@@ -1,5 +1,10 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.13.0 (dev)
+
+* Moved `FingerprintPatcher` out of `Internal` namespace
+  and made it accept any `Diff`, not just `EntityDiff`s
+
 ## Version 3.12.0 (2018-11-06)
 
 * Added compatibility with Wikibase DataModel 9.x

@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Services\Diff;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher;
 
 /**
  * @since 1.0

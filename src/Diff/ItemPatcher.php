@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Services\Diff;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher;
 use Wikibase\DataModel\Services\Diff\Internal\SiteLinkListPatcher;
 
 /**

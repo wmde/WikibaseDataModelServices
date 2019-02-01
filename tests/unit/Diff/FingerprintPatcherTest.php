@@ -1,17 +1,17 @@
 <?php
 
-namespace Wikibase\DataModel\Services\Tests\Diff\Internal;
+namespace Wikibase\DataModel\Services\Tests\Diff;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
-use Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher;
+use Wikibase\DataModel\Services\Diff\FingerprintPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher
+ * @covers Wikibase\DataModel\Services\Diff\FingerprintPatcher
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
