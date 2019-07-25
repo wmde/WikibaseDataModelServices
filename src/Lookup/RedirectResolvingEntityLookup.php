@@ -86,9 +86,9 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 
 			// Try one more time
 			try {
-				$this->lookup->hasEntity( $ex->getRedirectTargetId() );
+				return $this->lookup->hasEntity( $ex->getRedirectTargetId() );
 			} catch ( UnresolvedEntityRedirectException $ex2 ) {
-				$this->lookup->hasEntity( $ex2->getRedirectTargetId() );
+				return $this->lookup->hasEntity( $ex2->getRedirectTargetId() );
 			}
 		}
 	}
