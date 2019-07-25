@@ -62,6 +62,7 @@ class RedirectResolvingEntityLookupTest extends TestCase {
 		return [
 			'no redirect' => [ new ItemId( 'Q10' ), new ItemId( 'Q10' ) ],
 			'one redirect' => [ new ItemId( 'Q11' ), new ItemId( 'Q10' ) ],
+			'double redirect' => [ new ItemId( 'Q12' ), new ItemId( 'Q10' ) ],
 		];
 	}
 
@@ -94,20 +95,12 @@ class RedirectResolvingEntityLookupTest extends TestCase {
 		$this->assertNull( $lookup->getEntity( $id ) );
 	}
 
-	public function testGetEntity_doubleRedirect() {
-		$lookup = new RedirectResolvingEntityLookup( $this->getLookupDouble() );
-
-		$id = new ItemId( 'Q12' ); // Q12 is a double redirect
-
-		$this->setExpectedException( UnresolvedEntityRedirectException::class );
-		$lookup->getEntity( $id );
-	}
-
 	public function hasEntityProvider() {
 		return [
 			'unknown entity' => [ new ItemId( 'Q7' ), false ],
 			'no redirect' => [ new ItemId( 'Q10' ), true ],
 			'one redirect' => [ new ItemId( 'Q11' ), true ],
+			'double redirect' => [ new ItemId( 'Q12' ), true ],
 			'broken redirect' => [ new ItemId( 'Q21' ), false ],
 		];
 	}

@@ -50,7 +50,17 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 		try {
 			return $this->lookup->getEntity( $entityId );
 		} catch ( UnresolvedEntityRedirectException $ex ) {
-			return $this->lookup->getEntity( $ex->getRedirectTargetId() );
+			// Avoid self-redirects
+			if ( $ex->getRedirectTargetId() === $entityId ) {
+				throw $ex;
+			}
+
+			// Try one more time
+			try {
+				return $this->lookup->getEntity( $ex->getRedirectTargetId() );
+			} catch ( UnresolvedEntityRedirectException $ex2 ) {
+				return $this->lookup->getEntity( $ex2->getRedirectTargetId() );
+			}
 		}
 	}
 
@@ -69,7 +79,17 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 		try {
 			return $this->lookup->hasEntity( $entityId );
 		} catch ( UnresolvedEntityRedirectException $ex ) {
-			return $this->lookup->hasEntity( $ex->getRedirectTargetId() );
+			// Avoid self-redirects
+			if ( $ex->getRedirectTargetId() === $entityId ) {
+				throw $ex;
+			}
+
+			// Try one more time
+			try {
+				$this->lookup->hasEntity( $ex->getRedirectTargetId() );
+			} catch ( UnresolvedEntityRedirectException $ex2 ) {
+				$this->lookup->hasEntity( $ex2->getRedirectTargetId() );
+			}
 		}
 	}
 
