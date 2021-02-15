@@ -1,5 +1,8 @@
 # Wikibase DataModel Services release notes
 
+## Version 5.3.0 (dev)
+* Added `IterableEntityIdPager`
+
 ## Version 5.2.0 (2020-03-10)
 * Allow installing with wikimedia/assert 0.5.0
 
