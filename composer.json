@@ -26,12 +26,12 @@
 	"repositories": {
 		"wikibase-datamodel": {
 			"type": "vcs",
-			"url": "https://github.com/aurelie1vndl/WikibaseDataModel.git"
+			"url": "https://github.com/makeitfly/WikibaseDataModel.git"
 		}
 	},
 	"require": {
 		"php": ">=7.2",
-		"wikibase/data-model": "~9.0|~8.0",
+		"data-values/data-values": "~3.0",
 		"wikibase/data-model": "dev-master",
 		"diff/diff": "~3.2",
 		"wikimedia/assert": "~0.2.2|~0.3.0|~0.4.0|~0.5.0"
