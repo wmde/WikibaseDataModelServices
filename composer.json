@@ -23,22 +23,16 @@
 	"support": {
 		"irc": "irc://irc.libera.chat/wikidata"
 	},
-	"repositories": {
-		"wikibase-datamodel": {
-			"type": "vcs",
-			"url": "https://github.com/makeitfly/WikibaseDataModel.git"
-		}
-	},
 	"require": {
-		"php": ">=7.2",
+		"php": ">=8.1",
+		"wikibase/data-model": "dev-master#cbbdfcb13e026357f7d441b9c901f06263304e46",
 		"data-values/data-values": "~3.0",
-		"wikibase/data-model": "dev-master",
 		"diff/diff": "~3.2",
 		"wikimedia/assert": "~0.2.2|~0.3.0|~0.4.0|~0.5.0"
 	},
 	"require-dev": {
 		"phpmd/phpmd": "~2.3",
-		"phpunit/phpunit": "~8.0"
+		"phpunit/phpunit": "~9"
 	},
 	"autoload": {
 		"psr-4": {
