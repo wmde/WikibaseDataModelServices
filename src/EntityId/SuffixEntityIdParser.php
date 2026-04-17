@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataModel\Services\EntityId;
 
 use Wikibase\DataModel\Entity\EntityId;
@@ -31,7 +33,7 @@ class SuffixEntityIdParser implements EntityIdParser {
 	 * @param string $prefix The prefix to be stripped. Stripping is case sensitive.
 	 * @param EntityIdParser $idParser
 	 */
-	public function __construct( $prefix, EntityIdParser $idParser ) {
+	public function __construct( string $prefix, EntityIdParser $idParser ) {
 		$this->prefix = $prefix;
 		$this->idParser = $idParser;
 	}
@@ -45,9 +47,8 @@ class SuffixEntityIdParser implements EntityIdParser {
 	 *
 	 * @throws EntityIdParsingException If the string does not start with the expected prefix,
 	 *         or the remaining suffix is not a valid entity ID string.
-	 * @return EntityId
 	 */
-	public function parse( $idSerialization ) {
+	public function parse( string $idSerialization ): EntityId {
 		$prefixLength = strlen( $this->prefix );
 
 		if ( strncmp( $idSerialization, $this->prefix, $prefixLength ) !== 0 ) {

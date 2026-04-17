@@ -1,9 +1,12 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataModel\Services\Tests\EntityId;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -27,7 +30,7 @@ class SuffixEntityIdParserTest extends TestCase {
 	/**
 	 * @dataProvider validInputProvider
 	 */
-	public function testParse( $prefix, $input, $expected ) {
+	public function testParse( string $prefix, string $input, EntityId $expected ) {
 		$parser = new SuffixEntityIdParser( $prefix, new BasicEntityIdParser() );
 		$this->assertEquals( $expected, $parser->parse( $input ) );
 	}
@@ -52,7 +55,7 @@ class SuffixEntityIdParserTest extends TestCase {
 	/**
 	 * @dataProvider invalidInputProvider
 	 */
-	public function testParse_invalid( $prefix, $input ) {
+	public function testParse_invalid( string $prefix, string $input ) {
 		$parser = new SuffixEntityIdParser( $prefix, new BasicEntityIdParser() );
 
 		$this->expectException( EntityIdParsingException::class );
