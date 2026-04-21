@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataModel\Services\EntityId;
 
 use InvalidArgumentException;
@@ -24,7 +26,7 @@ class EntityIdComposer {
 	/**
 	 * @var callable[]
 	 */
-	private $composers;
+	private array $composers;
 
 	/**
 	 * @param callable[] $composers Array mapping entity type identifiers to callables accepting a
@@ -44,16 +46,12 @@ class EntityIdComposer {
 	}
 
 	/**
-	 * @param string $entityType
-	 * @param mixed $uniquePart
-	 *
 	 * @throws InvalidArgumentException when the entity type is not known or the unique part is not
 	 *  unique.
 	 * @throws UnexpectedValueException when the configured composer did not return an EntityId
 	 *  object.
-	 * @return EntityId
 	 */
-	public function composeEntityId( $entityType, $uniquePart ) {
+	public function composeEntityId( string $entityType, mixed $uniquePart ): EntityId {
 		if ( !isset( $this->composers[$entityType] ) ) {
 			throw new InvalidArgumentException( 'Unknown entity type ' . $entityType );
 		}

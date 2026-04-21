@@ -78,7 +78,6 @@ class EntityIdComposerTest extends TestCase {
 
 	public static function invalidUniquePartProvider() {
 		return [
-			[ null, 1 ],
 			[ 'unknown', 2 ],
 			[ 'numeric-item', null ],
 			[ 'numeric-item', new ItemId( 'Q4' ) ],
